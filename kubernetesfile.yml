@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insureme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insureme
+  template:
+    metadata:
+      labels:
+        app: insureme
+    spec:
+      containers:
+        - name: insurance
+          image: eranil2u/insurance:1.0
+          ports:
+            - containerPort: 8081
+          env:
+            - name: PORT
+              value: "8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insureme
+spec:
+  type: NodePort
+  ports:
+    - port: 8081
+      targetPort: 8081
+  selector:
+    app: insureme
