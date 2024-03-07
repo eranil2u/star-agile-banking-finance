@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: insureme
+  name: finance
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: insureme
+      app: finance
   template:
     metadata:
       labels:
-        app: insureme
+        app: finance
     spec:
       containers:
-        - name: insurance
-          image: eranil2u/insurance:1.0
+        - name: finance
+          image: eranil2u/finance:v1
           ports:
             - containerPort: 8081
           env:
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: insureme
+  name: finance
 spec:
   type: NodePort
   ports:
     - port: 8081
       targetPort: 8081
   selector:
-    app: insureme
+    app: finance
