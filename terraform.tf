@@ -133,6 +133,9 @@ resource "aws_instance" "Prod-Server" {
  network_interface {
  device_index = 0
  network_interface_id = aws_network_interface.proj-ni.id
+ tags = {
+ Name = "Prod-Server"
+ }
  }
  user_data  = <<-EOF
  #!/bin/bash
@@ -142,7 +145,5 @@ resource "aws_instance" "Prod-Server" {
      sudo docker run -itd -p 8085:8081 eranil2u/financeme:img01
      sudo docker start $(docker ps -aq)
  EOF
- tags = {
- Name = "Prod-Server"
- }
+ 
 }
