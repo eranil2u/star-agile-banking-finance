@@ -10,7 +10,7 @@ terraform {
 
 # Configure the AWS provider
 provider "aws" {
-  region = "ap-south-1"
+  region = "us-east-1"
 }
 # Creating a VPC
 resource "aws_vpc" "proj-vpc" {
@@ -46,7 +46,7 @@ resource "aws_route_table" "proj-rt" {
 resource "aws_subnet" "proj-subnet" {
  vpc_id = aws_vpc.proj-vpc.id
  cidr_block = "10.0.1.0/24"
- availability_zone = "ap-south-1b"
+ availability_zone = "us-east-1b"
  tags = {
  Name = "subnet1"
  }
@@ -126,9 +126,9 @@ resource "aws_eip" "proj-eip" {
 
 # Creating an ubuntu EC2 instance
 resource "aws_instance" "Prod-Server" {
- ami = "ami-03bb6d83c60fc5f7c"
+ ami = "ami-080e1f13689e07408"
  instance_type = "t2.micro"
- availability_zone = "ap-south-1b"
+ availability_zone = "us-east-1a"
  key_name = "anil"
  network_interface {
  device_index = 0
@@ -139,7 +139,7 @@ resource "aws_instance" "Prod-Server" {
      sudo apt-get update -y
      sudo apt install docker.io -y
      sudo systemctl enable docker
-     sudo docker run -itd -p 8085:8081 eranil2u/finance:v1
+     sudo docker run -itd -p 8085:8081 eranil2u/financeme:img01
      sudo docker start $(docker ps -aq)
  EOF
  tags = {
