@@ -124,7 +124,7 @@ resource "aws_eip" "proj-eip" {
 resource "aws_instance" "Prod-Server" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
-  availability_zone = "us-east-1a"
+  availability_zone = "us-east-1b"
   key_name      = "anil"
 
   network_interface {
